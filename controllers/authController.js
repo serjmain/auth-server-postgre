@@ -41,7 +41,7 @@ module.exports = {
     getUsers(req, res) {        
         authRepository
             .getAll(req.query)
-            .then((result) => res.status(200).json(result))
+            .then((result) => res.status(200).json(result.rows))
             .catch(e => res.status(404).send(e));
     },
     
