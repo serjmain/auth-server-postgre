@@ -37,13 +37,20 @@ module.exports = {
         await authRepository.saveUserToken(id, accessToken, refreshToken, role);
         res.status(200).send({ accessToken, refreshToken });
     },
-    
-    getUsers(req, res) {
+
+    getUsers(req, res) {        
         authRepository
             .getAll(req.query)
             .then((result) => res.status(200).json(result))
             .catch(e => res.status(404).send(e));
     },
+    
+    /* getUsers(req, res) {
+        authRepository
+            .getAll(req.query)
+            .then((result) => res.status(200).json(result))
+            .catch(e => res.status(404).send(e));
+    }, */
 
     async login(req, res) {
         const errors = validationResult(req);

@@ -3,6 +3,10 @@ const db = require('../config/database')
 module.exports = {
     TABLE: 'tokens',   
 
+       async getAll() {
+        const query = db.query(`SELECT * from users`);
+        return query;
+       },
     /* async getAll() { 
                
         const getUsers = async () => {
