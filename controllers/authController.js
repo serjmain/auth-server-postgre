@@ -16,7 +16,7 @@ module.exports = {
         }
         const role = 'USER';
         const { email, password, name } = req.body;
-        const { data: { id, error } } = await userService.registration({ email, password, name });            
+        const { data: { id, error } } = await userService.registration({ email, password, name }); 
 
         if (error) {
             return res.status(400).json(error);
@@ -44,13 +44,6 @@ module.exports = {
             .then((result) => res.status(200).json(result.rows))
             .catch(e => res.status(404).send(e));
     },
-    
-    /* getUsers(req, res) {
-        authRepository
-            .getAll(req.query)
-            .then((result) => res.status(200).json(result))
-            .catch(e => res.status(404).send(e));
-    }, */
 
     async login(req, res) {
         const errors = validationResult(req);

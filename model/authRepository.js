@@ -6,31 +6,7 @@ module.exports = {
        async getAll() {
         const query = db.query(`SELECT * from users`);
         return query;
-       },
-    /* async getAll() { 
-               
-        const getUsers = async () => {
-            const query = `SELECT * FROM authUsers`;
-            return queryHelper.process(query);
-        };        
-
-        const getTokens = async () => {
-            const query = `SELECT * FROM ${this.TABLE}`;
-            return queryHelper.process(query);
-        }       
-
-        const [users, tokens] = await Promise.all([getUsers(), getTokens()])
-        
-        return users.map((user) => {
-            const isActive = tokens.find(({ userid }) => String(user.userid) === String(userid));
-            return {
-                email: user.email,
-                id: user.userid,
-                role: user.role,
-                active: !!isActive,
-            }
-        })               
-    }, */
+       },    
 
     async saveUserToken(userId, accessToken, refreshToken, role) {
         const query = db.query(`INSERT INTO ${this.TABLE} (userId, accessToken, refreshToken, role) VALUES($1,$2,$3,$4)`, [userId, accessToken, refreshToken, role]);
@@ -42,8 +18,7 @@ module.exports = {
         const query = db.query(`DELETE FROM ${this.TABLE} where userId = $1`, [userId]);
 
         return query;
-    },
-    
+    },    
 
     async getByToken(refreshToken) {
         const query = db.query(`SELECT * FROM ${this.TABLE} WHERE refreshToken = $1`, [refreshToken]);

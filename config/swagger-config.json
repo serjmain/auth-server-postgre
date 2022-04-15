@@ -12,7 +12,10 @@
         },
         {
           "url": "https://blueberry-crisp-41363.herokuapp.com/"
-        }        
+        }, 
+        {
+          "url": "https://rocky-eyrie-99010.herokuapp.com/"
+        }       
       ]
     },
     "apis": ["./routes/*.js"]
