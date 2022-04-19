@@ -12,7 +12,7 @@ module.exports = {
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            return res.status(400).json({ message: 'registration error', errors})
+            return res.status(400).json({ message: 'registration error', errors});
         }
         const role = 'USER';
         const { email, password, name } = req.body;
@@ -49,8 +49,9 @@ module.exports = {
         const errors = validationResult(req);
         
         if (!errors.isEmpty()) {
-            return res.status(400).json({ message: 'login error', errors})
+            return res.status(400).json({ message: 'login error', errors});
         }
+
         const { email, password } = req.body;
         const user = await userRepository.getByEmail(email);       
 
@@ -79,11 +80,11 @@ module.exports = {
         const data = await jwt.verify(authHeader.split(' ')[1], secret.accessKey);                      
 
         await authRepository.clearUserTokens(data.id);
-        res.status(200).json({ message: 'successfully logout' })
+        res.status(200).json({ message: 'successfully logout' });
     },
 
     async refresh(req, res) {
-        const cookieToken = req.headers.cookie
+        const cookieToken = req.headers.cookie;
         const result = cookieToken.replace(/^.{6}/, '');     
         const item = await authRepository.getByToken(result);         
         
@@ -102,16 +103,17 @@ module.exports = {
         const header = req.headers.authorization;        
                
         if (header === undefined ) {
-            return res.status(401).json({ message: 'user is not authorized' })
+            return res.status(401).json({ message: 'user is not authorized' });
         }
-        const item = header.split(' ')[1]
+
+        const item = header.split(' ')[1];
 
         const checkedToken = await authRepository.checkToken(item);        
 
         if (!checkedToken.rowCount || checkedToken.rows[0].accesstoken !== item ) {
-            return res.status(200).json({ message: 'false' })
+            return res.status(200).json({ message: 'false' });
         }
 
-        res.status(200).json({ message: 'true' })
+        res.status(200).json({ message: 'true' });
     }
 }

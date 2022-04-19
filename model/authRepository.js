@@ -5,6 +5,7 @@ module.exports = {
 
        async getAll() {
         const query = db.query(`SELECT * from users`);
+        
         return query;
        },    
 

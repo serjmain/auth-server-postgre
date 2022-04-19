@@ -22,5 +22,5 @@ app.use("/authApi-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 app.listen(PORT, async () => {
     await client.connect();
-    console.log(`Server is running on http://localhost:${PORT}`)
+    console.log(`Server is running on http://localhost:${PORT}`);
 })

@@ -1,7 +1,7 @@
 const express = require('express');
 const authController = require('../controllers/authController');
 const authRouter = express.Router();
-const { check } = require ('express-validator');
+const validator = require ('../service/validator');
 
 /**
  * @swagger
@@ -132,13 +132,7 @@ const { check } = require ('express-validator');
  *         description: Server error
  */
 
-authRouter.post('/registration', [
-    check('email', 'email field can\'t be empty').notEmpty(),
-    check('email', 'email must be longer than 6 and shorter than 18 characters').isLength({ min: 6, max: 18 }),
-    check('password', 'password field can\'t be empty').notEmpty(),
-    check('password', 'password must be longer than 4 and shorter than 14 characters').isLength({ min: 4, max: 14 }),
-    check('name', 'email field can\'t be empty').notEmpty()
-], authController.registration);
+authRouter.post('/registration', validator.validateRegistration, authController.registration);
 
 /**
  * @swagger
@@ -165,10 +159,7 @@ authRouter.post('/registration', [
  *       500:
  *         description: Server error
  */
-authRouter.post('/login', [
-    check('email', 'email field can\'t be empty').notEmpty(),
-    check('password', 'password field can\'t be empty').notEmpty()
-], authController.login);
+authRouter.post('/login', validator.validateLogin, authController.login);
 
 /**
  * @swagger
