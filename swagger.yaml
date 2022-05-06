@@ -146,21 +146,21 @@ components:
         - userId
         - role
       properties:
-          accessToken:
-            type: string
-            description: accessToken
-          refreshToken:
-            type: string
-            description: refreshToken
-          userId:
-            type: string
-            description: user id
-          role:
-            type: string
-            description: role                         
+        accessToken:
+          type: string
+          description: accessToken
+        refreshToken:
+          type: string
+          description: refreshToken
+        userId:
+          type: string
+          description: user id
+        role:
+          type: string
+          description: role
       example:
-          email: 1258@gmail.com
-          password: ehhwetj651he
+        email: 1258@gmail.com
+        password: ehhwetj651he
     Token:
       type: object
       required:
@@ -185,4 +185,4 @@ components:
           type: text
           description: accessToken
       example:
-        accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0MWIxOGY5LTg2YTQtNGU5Yi05MTU1LTk3MmU4MWUwMTJmYyIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjQ5NjAyMTYzLCJleHAiOjE2NDk2MDU3NjN9._DWuGmxmvTyI0PqC51u_QYjHKvHLNbc3o-_t7srRqH8          
+        accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0MWIxOGY5LTg2YTQtNGU5Yi05MTU1LTk3MmU4MWUwMTJmYyIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjQ5NjAyMTYzLCJleHAiOjE2NDk2MDU3NjN9._DWuGmxmvTyI0PqC51u_QYjHKvHLNbc3o-_t7srRqH8
