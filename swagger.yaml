@@ -130,11 +130,11 @@ components:
           - password
         properties:
           email:
-          type: string
-          description: User email
+            type: string
+            description: User email
           password:
-          type: string
-          description: User password
+            type: string
+            description: User password
         example:
             email: 1258@gmail.com
             password: ehhwetj651he
