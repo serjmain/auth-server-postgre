@@ -168,7 +168,7 @@ components:
         - refreshToken
       properties:
         accessToken:
-        type: text
+          type: text
           description: accessToken
         refreshToken:
           type: string
