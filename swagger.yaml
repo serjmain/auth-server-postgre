@@ -106,23 +106,23 @@ components:
       UserAuth:
         type: object
         required:
-          - email
-          - password
-          - name
+        - email
+        - password
+        - name
         properties:
-            email:
-              type: string
-              description: User email
-            password:
-              type: string
-              description: User password
-            name:
-              type: string
-              description: User name
+          email:
+            type: string
+            description: User email
+          password:
+            type: string
+            description: User password
+          name:
+            type: string
+            description: User name
         example:
-            email: 1258@gmail.com
-            password: ehhwetj651he
-            name: Genadiy
+          email: 1258@gmail.com
+          password: ehhwetj651he
+          name: Genadiy
       Login:
         type: object
         required:
