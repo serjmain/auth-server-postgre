@@ -102,87 +102,87 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-    schemas:
-      UserAuth:
-        type: object
-        required:
+  schemas:
+    UserAuth:
+      type: object
+      required:
+      - email
+      - password
+      - name
+      properties:
+        email:
+          type: string
+          description: User email
+        password:
+          type: string
+          description: User password
+        name:
+          type: string
+          description: User name
+      example:
+        email: 1258@gmail.com
+        password: ehhwetj651he
+        name: Genadiy
+    Login:
+      type: object
+      required:
         - email
         - password
-        - name
-        properties:
-          email:
-            type: string
-            description: User email
-          password:
-            type: string
-            description: User password
-          name:
-            type: string
-            description: User name
-        example:
+      properties:
+        email:
+          type: string
+          description: User email
+        password:
+          type: string
+          description: User password
+      example:
           email: 1258@gmail.com
           password: ehhwetj651he
-          name: Genadiy
-      Login:
-        type: object
-        required:
-          - email
-          - password
-        properties:
-          email:
-            type: string
-            description: User email
-          password:
-            type: string
-            description: User password
-        example:
-            email: 1258@gmail.com
-            password: ehhwetj651he
-      registrationResponce:
-        type: object
-        required:
-          - accessToken
-          - refreshToken
-          - userId
-          - role
-        properties:
-            accessToken:
-              type: string
-              description: accessToken
-            refreshToken:
-              type: string
-              description: refreshToken
-            userId:
-              type: string
-              description: user id
-            role:
-              type: string
-              description: role                         
-        example:
-            email: 1258@gmail.com
-            password: ehhwetj651he
-      Token:
-        type: object
-        required:
-          - accessToken
-          - refreshToken
-        properties:
+    registrationResponce:
+      type: object
+      required:
+        - accessToken
+        - refreshToken
+        - userId
+        - role
+      properties:
           accessToken:
-          type: text
+            type: string
             description: accessToken
           refreshToken:
             type: string
             description: refreshToken
-        example:
-          accessToken: a155cac0-a85a-11ec-9fcd-657971076650
-          refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyM0BnbWFpbC5jb20iLCJpYXQiOjE2NDc3ODY3NzQsImV4cCI6MTY1MDM3ODc3NH0.-iI2u4xFIcXOnyc6lM_MlLx1DqHnu27DlIWwkRDPTHc
-      CheckToken:
-        type: object
-        required:
-          - accessToken
-        properties:
-          accessToken:
-            type: text
-            description: accessToken
-        example:
-          accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0MWIxOGY5LTg2YTQtNGU5Yi05MTU1LTk3MmU4MWUwMTJmYyIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjQ5NjAyMTYzLCJleHAiOjE2NDk2MDU3NjN9._DWuGmxmvTyI0PqC51u_QYjHKvHLNbc3o-_t7srRqH8          
+          userId:
+            type: string
+            description: user id
+          role:
+            type: string
+            description: role                         
+      example:
+          email: 1258@gmail.com
+          password: ehhwetj651he
+    Token:
+      type: object
+      required:
+        - accessToken
+        - refreshToken
+      properties:
+        accessToken:
+        type: text
+          description: accessToken
+        refreshToken:
+          type: string
+          description: refreshToken
+      example:
+        accessToken: a155cac0-a85a-11ec-9fcd-657971076650
+        refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyM0BnbWFpbC5jb20iLCJpYXQiOjE2NDc3ODY3NzQsImV4cCI6MTY1MDM3ODc3NH0.-iI2u4xFIcXOnyc6lM_MlLx1DqHnu27DlIWwkRDPTHc
+    CheckToken:
+      type: object
+      required:
+        - accessToken
+      properties:
+        accessToken:
+          type: text
+          description: accessToken
+      example:
+        accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0MWIxOGY5LTg2YTQtNGU5Yi05MTU1LTk3MmU4MWUwMTJmYyIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjQ5NjAyMTYzLCJleHAiOjE2NDk2MDU3NjN9._DWuGmxmvTyI0PqC51u_QYjHKvHLNbc3o-_t7srRqH8          
