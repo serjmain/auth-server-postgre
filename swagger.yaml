@@ -96,7 +96,7 @@ paths:
           description: Bad Request
         500:
           description: Server error
-definitions:
+components:
   securitySchemes:
     bearerAuth:
       type: http
@@ -134,7 +134,7 @@ definitions:
           description: User email
           password:
           type: string
-            description: User password
+          description: User password
         example:
             email: 1258@gmail.com
             password: ehhwetj651he
