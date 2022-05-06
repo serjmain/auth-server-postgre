@@ -46,7 +46,7 @@ const validator = require ('../service/validator');
  *              description: User password
  *        example:
  *            email: 1258@gmail.com
- *            password: ehhwetj651he            
+ *            password: ehhwetj651he        
  *      registrationResponce:
  *        type: object
  *        required:
@@ -61,12 +61,12 @@ const validator = require ('../service/validator');
  *            refreshToken:
  *              type: string
  *              description: refreshToken
- *            userId: 
+ *            userId:
  *              type: string
  *              description: user id
  *            role:
  *              type: string
- *              description: role      
+ *              description: role     
  *                        
  *        example:
  *            email: 1258@gmail.com
