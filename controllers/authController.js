@@ -12,9 +12,9 @@ module.exports = {
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            return res.status(400).json({ message: 'registration error', errors});
+            return res.status(400).json({ message: "registration error", errors});
         }
-        const role = 'USER';
+        const role = "USER";
         const { email, password, name } = req.body;
         const { data: { id, error } } = await userService.registration({ email, password, name }); 
 
@@ -26,14 +26,14 @@ module.exports = {
         const candidate = await userRepository.getByEmail(email);        
 
         if (candidate.rowCount) {
-            return res.status(400).json({ message: 'user with this email already exist'});
+            return res.status(400).json({ message: "user with this email already exist"});
         }  
 
         await userRepository.saveUser(email, hashPassword, id);
         
         const { accessToken, refreshToken } = tokenService.createToken({ id, role });
 
-        res.cookie('token', refreshToken, { httpOnly: true });        
+        res.cookie("token", refreshToken, { httpOnly: true });        
         await authRepository.saveUserToken(id, accessToken, refreshToken, role);
         res.status(200).send({ accessToken, refreshToken });
     },
@@ -49,7 +49,7 @@ module.exports = {
         const errors = validationResult(req);
         
         if (!errors.isEmpty()) {
-            return res.status(400).json({ message: 'login error', errors});
+            return res.status(400).json({ message: "login error", errors});
         }
 
         const { email, password } = req.body;
@@ -66,30 +66,43 @@ module.exports = {
         const { accessToken, refreshToken } = tokenService.createToken({ id: user.rows[0].userid, role: user.rows[0].role });
 
         await authRepository.clearUserTokens(user.rows[0].userid);
-        res.cookie('token', refreshToken, { httpOnly: true });
+        res.cookie("token", refreshToken, { httpOnly: true });
         await authRepository.saveUserToken(user.rows[0].userid, accessToken, refreshToken, role = user.rows[0].role);
         res.status(200).send({ accessToken, refreshToken });
     },
 
     async logout(req, res) {        
-        const authHeader = req.headers.authorization;        
+        const authHeader = req.headers.authorization;      
         
         if (authHeader === undefined) {
-            return res.status(401).json({ message: 'user is not authorized' });
-        }       
+            return res.status(401).json({ message: "user is not authorized" });
+        }
+        const item = authHeader.split(' ')[1];
+        const checkedToken = await authRepository.checkToken(item);
+        
+        if(checkedToken.rows.length < 1) {
+            return res.status(400).json({ message: "invalid token" })
+        }
+
         const data = await jwt.verify(authHeader.split(' ')[1], secret.accessKey);                      
 
         await authRepository.clearUserTokens(data.id);
-        res.status(200).json({ message: 'successfully logout' });
+        res.clearCookie("token");
+        res.status(200).json({ message: "successfully logout" });
     },
 
     async refresh(req, res) {
         const cookieToken = req.headers.cookie;
-        const result = cookieToken.replace(/^.{6}/, '');     
-        const item = await authRepository.getByToken(result);         
+
+        if (cookieToken === undefined) {
+            return res.status(400).json({ message: "invalid token" })
+        }
+
+        const result = cookieToken.replace(/^.{6}/, '');
+        const item = await authRepository.getByToken(result);        
         
         if (!item.rowCount) {
-            return res.status(401).json({ message: 'user is not authorized' });
+            return res.status(401).json({ message: "user is not authorized" });
         }
 
         const { accessToken, refreshToken } = tokenService.createToken({ id: item.rows[0].id, role: item.rows[0].role });
@@ -103,17 +116,16 @@ module.exports = {
         const header = req.headers.authorization;        
                
         if (header === undefined ) {
-            return res.status(401).json({ message: 'user is not authorized' });
+            return res.status(401).json({ message: "user is not authorized" });
         }
 
         const item = header.split(' ')[1];
-
         const checkedToken = await authRepository.checkToken(item);        
 
         if (!checkedToken.rowCount || checkedToken.rows[0].accesstoken !== item ) {
-            return res.status(200).json({ message: 'false' });
+            return res.status(200).json({ message: "false" });
         }
 
-        res.status(200).json({ message: 'true' });
+        res.status(200).json({ message: "true" });
     }
 }

@@ -1,7 +1,7 @@
 const express = require('express');
 const authController = require('../controllers/authController');
 const authRouter = express.Router();
-const validator = require ('../service/validator');
+const v = require ('../service/validator');
 
 /**
  * @swagger
@@ -132,7 +132,7 @@ const validator = require ('../service/validator');
  *         description: Server error
  */
 
-authRouter.post('/registration', validator.validateRegistration, authController.registration);
+authRouter.post('/registration', v.validateRegistration, authController.registration);
 
 /**
  * @swagger
@@ -159,7 +159,7 @@ authRouter.post('/registration', validator.validateRegistration, authController.
  *       500:
  *         description: Server error
  */
-authRouter.post('/login', validator.validateLogin, authController.login);
+authRouter.post('/login', v.validateLogin, authController.login);
 
 /**
  * @swagger
@@ -213,7 +213,7 @@ authRouter.get('/refresh', authController.refresh);
  *     responses:
  *       200:
  *         description: token status
- *       401:
+ *       400:
  *         description: Bad Request         
  *       500:
  *         description: Server error
