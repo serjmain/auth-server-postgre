@@ -16,14 +16,14 @@ module.exports = {
         }
         const role = "USER";
         const { email, password, name } = req.body;
-        const { data: { id, error } } = await userService.registration({ email, password, name }); 
+        const { data: { id, error } } = await userService.registration({ email, password, name });
 
         if (error) {
             return res.status(400).json(error);
         }
         
         const hashPassword = bcrypt.hashSync(password, 7);
-        const candidate = await userRepository.getByEmail(email);        
+        const candidate = await userRepository.getByEmail(email);
 
         if (candidate.rowCount) {
             return res.status(400).json({ message: "user with this email already exist"});
@@ -33,12 +33,12 @@ module.exports = {
         
         const { accessToken, refreshToken } = tokenService.createToken({ id, role });
 
-        res.cookie("token", refreshToken, { httpOnly: true });        
+        res.cookie("token", refreshToken, { httpOnly: true });
         await authRepository.saveUserToken(id, accessToken, refreshToken, role);
         res.status(200).send({ accessToken, refreshToken });
     },
 
-    getUsers(req, res) {        
+    getUsers(req, res) {
         authRepository
             .getAll(req.query)
             .then((result) => res.status(200).json(result.rows))
@@ -53,7 +53,7 @@ module.exports = {
         }
 
         const { email, password } = req.body;
-        const user = await userRepository.getByEmail(email);       
+        const user = await userRepository.getByEmail(email);
 
         if (!user.rowCount) {
             return res.status(400).json({ message: "this email does not exist" });
@@ -71,8 +71,8 @@ module.exports = {
         res.status(200).send({ accessToken, refreshToken });
     },
 
-    async logout(req, res) {        
-        const authHeader = req.headers.authorization;      
+    async logout(req, res) {
+        const authHeader = req.headers.authorization;
         
         if (authHeader === undefined) {
             return res.status(401).json({ message: "user is not authorized" });
@@ -84,7 +84,7 @@ module.exports = {
             return res.status(400).json({ message: "invalid token" })
         }
 
-        const data = await jwt.verify(authHeader.split(' ')[1], secret.accessKey);                      
+        const data = await jwt.verify(authHeader.split(' ')[1], secret.accessKey);
 
         await authRepository.clearUserTokens(data.id);
         res.clearCookie("token");
